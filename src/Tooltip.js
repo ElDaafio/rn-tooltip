@@ -163,6 +163,7 @@ class Tooltip extends React.Component<Props, State> {
             top: yOffset,
             left: xOffset,
             backgroundColor: highlightColor,
+            borderColor: borderColor,
             overflow: "visible",
             width: elementWidth,
             height: elementHeight
