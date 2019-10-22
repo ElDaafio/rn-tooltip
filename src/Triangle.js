@@ -5,7 +5,7 @@ import { View, StyleSheet } from 'react-native';
 
 type Props = {
   style: any,
-  isDown: boolean,
+  isDown: boolean
 };
 
 const Triangle = ({ style, isDown, pointerBorderColor }: Props) => {
@@ -17,7 +17,7 @@ const Triangle = ({ style, isDown, pointerBorderColor }: Props) => {
           styles.triangleBorder,
           style,
           pointerBorderColor ? { borderBottomColor: pointerBorderColor } : {},
-          isDown ? styles.down : {},
+          isDown ? styles.down : {}
         ]}
       />
     </Fragment>
@@ -26,7 +26,7 @@ const Triangle = ({ style, isDown, pointerBorderColor }: Props) => {
 
 const styles = StyleSheet.create({
   down: {
-    transform: [{ rotate: '180deg' }],
+    transform: [{ rotate: '180deg' }]
   },
   triangle: {
     width: 0,
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 15,
     borderLeftColor: 'transparent',
     borderRightColor: 'transparent',
-    borderBottomColor: 'white',
+    borderBottomColor: 'white'
   },
   triangleBorder: {
     width: 0,
@@ -50,8 +50,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 17,
     borderLeftColor: 'transparent',
     borderRightColor: 'transparent',
-    borderBottomColor: pointerBorderColor,
-  },
+    borderBottomColor: 'white'
+  }
 });
 
 export default Triangle;
