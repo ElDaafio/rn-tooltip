@@ -1,17 +1,17 @@
 //  @flow
 
-import * as React from 'react';
+import * as React from "react";
 import {
   TouchableOpacity,
   Modal,
   View,
-  ViewPropTypes as RNViewPropTypes,
-} from 'react-native';
-import PropTypes from 'prop-types';
+  ViewPropTypes as RNViewPropTypes
+} from "react-native";
+import PropTypes from "prop-types";
 
-import Triangle from './Triangle';
-import { ScreenWidth, ScreenHeight, isIOS } from './helpers';
-import getTooltipCoordinate from './getTooltipCoordinate';
+import Triangle from "./Triangle";
+import { ScreenWidth, ScreenHeight, isIOS } from "./helpers";
+import getTooltipCoordinate from "./getTooltipCoordinate";
 
 const ViewPropTypes = RNViewPropTypes || View.propTypes;
 
@@ -20,7 +20,7 @@ type State = {
   yOffset: number,
   xOffset: number,
   elementWidth: number,
-  elementHeight: number,
+  elementHeight: number
 };
 
 type Props = {
@@ -37,7 +37,7 @@ type Props = {
   overlayColor: string,
   backgroundColor: string,
   highlightColor: string,
-  toggleWrapperProps: {},
+  toggleWrapperProps: {}
 };
 
 class Tooltip extends React.Component<Props, State> {
@@ -46,7 +46,7 @@ class Tooltip extends React.Component<Props, State> {
     yOffset: 0,
     xOffset: 0,
     elementWidth: 0,
-    elementHeight: 0,
+    elementHeight: 0
   };
 
   renderedElement;
@@ -86,7 +86,7 @@ class Tooltip extends React.Component<Props, State> {
       backgroundColor,
       width,
       withPointer,
-      containerStyle,
+      containerStyle
     } = this.props;
 
     const { x, y } = getTooltipCoordinate(
@@ -98,42 +98,50 @@ class Tooltip extends React.Component<Props, State> {
       ScreenHeight,
       width,
       height,
-      withPointer,
+      withPointer
     );
 
     return {
-      position: 'absolute',
+      position: "absolute",
       left: x,
       top: y,
       width,
       height,
       backgroundColor,
       // default styles
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
       flex: 1,
       borderRadius: 10,
       padding: 10,
-      ...containerStyle,
+      ...containerStyle
     };
   };
 
   renderPointer = tooltipY => {
     const { yOffset, xOffset, elementHeight, elementWidth } = this.state;
-    const { backgroundColor, pointerColor } = this.props;
+    const {
+      backgroundColor,
+      pointerColor,
+      pointerStyle,
+      triangleStyle
+    } = this.props;
     const pastMiddleLine = yOffset > tooltipY;
 
     return (
       <View
         style={{
-          position: 'absolute',
+          position: "absolute",
           top: pastMiddleLine ? yOffset - 13 : yOffset + elementHeight - 2,
-          left: xOffset + elementWidth / 2 - 7.5,
+          left: xOffset + elementWidth / 2 - 7.5
         }}
       >
         <Triangle
-          style={{ borderBottomColor: pointerColor || backgroundColor }}
+          style={{
+            borderBottomColor: pointerColor || backgroundColor,
+            ...pointerStyle
+          }}
           isDown={pastMiddleLine}
         />
       </View>
@@ -151,13 +159,13 @@ class Tooltip extends React.Component<Props, State> {
       <View>
         <View
           style={{
-            position: 'absolute',
+            position: "absolute",
             top: yOffset,
             left: xOffset,
             backgroundColor: highlightColor,
-            overflow: 'visible',
+            overflow: "visible",
             width: elementWidth,
-            height: elementHeight,
+            height: elementHeight
           }}
         >
           {this.props.children}
@@ -181,9 +189,9 @@ class Tooltip extends React.Component<Props, State> {
             xOffset: pageOffsetX,
             yOffset: pageOffsetY,
             elementWidth: width,
-            elementHeight: height,
+            elementHeight: height
           });
-        },
+        }
       );
   };
 
@@ -223,6 +231,7 @@ Tooltip.propTypes = {
   height: PropTypes.number,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   containerStyle: ViewPropTypes.style,
+  pointerStyle: ViewPropTypes.style,
   pointerColor: PropTypes.string,
   onClose: PropTypes.func,
   onOpen: PropTypes.func,
@@ -230,21 +239,21 @@ Tooltip.propTypes = {
   toggleWrapperProps: PropTypes.object,
   overlayColor: PropTypes.string,
   backgroundColor: PropTypes.string,
-  highlightColor: PropTypes.string,
+  highlightColor: PropTypes.string
 };
 
 Tooltip.defaultProps = {
   toggleWrapperProps: {},
   withOverlay: true,
-  highlightColor: 'transparent',
+  highlightColor: "transparent",
   withPointer: true,
   toggleOnPress: true,
   height: 40,
   width: 150,
   containerStyle: {},
-  backgroundColor: '#617080',
+  backgroundColor: "#617080",
   onClose: () => {},
-  onOpen: () => {},
+  onOpen: () => {}
 };
 
 const styles = {
@@ -252,10 +261,10 @@ const styles = {
     backgroundColor: withOverlay
       ? overlayColor
         ? overlayColor
-        : 'rgba(250, 250, 250, 0.70)'
-      : 'transparent',
-    flex: 1,
-  }),
+        : "rgba(250, 250, 250, 0.70)"
+      : "transparent",
+    flex: 1
+  })
 };
 
 export default Tooltip;
