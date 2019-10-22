@@ -148,7 +148,13 @@ class Tooltip extends React.Component<Props, State> {
     );
   };
   renderContent = withTooltip => {
-    const { popover, withPointer, toggleOnPress, highlightColor } = this.props;
+    const {
+      popover,
+      withPointer,
+      toggleOnPress,
+      highlightColor,
+      borderColor
+    } = this.props;
 
     if (!withTooltip)
       return this.wrapWithPress(toggleOnPress, this.props.children);
